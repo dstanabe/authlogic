@@ -111,7 +111,11 @@ module ActsAsAuthenticTest
       
       u.password = "test"
       assert !u.valid?
-      assert u.errors[:password_confirmation].size == 0
+      if ActiveModel.respond_to?(:version) and ActiveModel.version.segments.first >= 4
+        assert u.errors[:password_confirmation].size > 0
+      else
+        assert u.errors[:password_confirmation].size == 0
+      end
     end
     
     def test_validates_confirmation_of_password
@@ -119,7 +123,12 @@ module ActsAsAuthenticTest
       u.password = "test"
       u.password_confirmation = "test2"
       assert !u.valid?
-      assert u.errors[:password].size > 0
+
+      if ActiveModel.respond_to?(:version) and ActiveModel.version.segments.first >= 4
+        assert u.errors[:password_confirmation].size > 0
+      else 
+        assert u.errors[:password].size > 0
+      end
       
       u.password_confirmation = "test"
       assert !u.valid?

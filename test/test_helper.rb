@@ -14,6 +14,7 @@ logger.level= Logger::FATAL
 ActiveRecord::Base.logger = logger
 
 ActiveRecord::Base.configurations = true
+ActiveRecord::Base.default_timezone = :local
 ActiveRecord::Schema.define(:version => 1) do
   create_table :companies do |t|
     t.datetime  :created_at
@@ -115,7 +116,7 @@ class ActiveSupport::TestCase
   self.use_instantiated_fixtures  = false
   self.pre_loaded_fixtures = false
   fixtures :all
-  setup :activate_authlogic
+  setup :activate_authlogic 
 
   private
     def password_for(user)

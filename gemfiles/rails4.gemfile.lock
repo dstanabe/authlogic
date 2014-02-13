@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/nathany/Dropbox/Development/jobber/vendor/authlogic
+  remote: /home/dean/rails_projects/authlogic
   specs:
     authlogic (3.3.0)
       activerecord (>= 3.2)
